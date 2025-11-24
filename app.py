@@ -71,9 +71,6 @@ if user_input:
     st.session_state.memory.append({'role': 'user', 'content': user_input})
     st.session_state.memory.append({'role': 'assistant', 'content': reply})
 
-    # 再実行して画面を更新
-    st.experimental_rerun()
-
 st.markdown('---')
 
 # ここで、さっき作った log_area の中に「最新のMustache発言だけ」を描画
@@ -93,5 +90,6 @@ with log_area:
         st.markdown(f'Mustache：{last["content"]}')
 
 st.markdown('---')
+
 
 
