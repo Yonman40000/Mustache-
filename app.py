@@ -55,17 +55,6 @@ with col2:
     if 'memory' not in st.session_state:
         st.session_state.memory = []
 
-#チャットログ
-st.markdown('### Mustache')
-if len(st.session_state.memory) == 0:
-    st.markdown('まだ会話がありません。')
-else:
-    latest_messages = st.session_state.memory[-1:]  #last 1 lines
-    for m in latest_messages:
-        st.markdown(f'Mustache：{m["content"]}')
-st.markdown('---')
-
-
 #入力欄
 user_input = st.text_input('入力してください(Enterで送信)')
 if user_input:
@@ -77,6 +66,17 @@ if user_input:
     st.session_state.memory.append({'role': 'assistant', 'content': reply})
 
 st.markdown('---')
+
+#チャットログ
+st.markdown('### Mustache')
+if len(st.session_state.memory) == 0:
+    st.markdown('まだ会話がありません。')
+else:
+    latest_messages = st.session_state.memory[-1:]  #last 1 lines
+    for m in latest_messages:
+        st.markdown(f'Mustache：{m["content"]}')
+st.markdown('---')
+
 
 
 
