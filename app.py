@@ -48,7 +48,7 @@ st.title('Mustacheと話そう！')
 col1, col2 = st.columns([2,1])
 with col1:
     # ここに立ち絵画像のパスを入れる（同じフォルダに heroine.png を置くイメージ）
-    st.image('mustache.png', caption='Mustache', use_container_width=True)
+    st.image('Mustache.png', caption='Mustache', use_container_width=True)
 with col2:
     if 'Mustache' not in st.session_state:
         st.session_state.Mustache = Character('Mustache', 'おしゃべり', client)
@@ -76,3 +76,4 @@ else:
     for m in latest_messages:
         st.markdown(f'Mustache：{m["content"]}')
 st.markdown('---')
+
