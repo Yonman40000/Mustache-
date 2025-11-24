@@ -75,7 +75,7 @@ st.markdown('---')
 
 # ここで、さっき作った log_area の中に「最新のMustache発言だけ」を描画
 with log_area:
-    st.markdown('### Mustache')
+    st.markdown('### Mustache：')
 
     # メモリから「assistant」のメッセージだけを取り出す
     assistant_messages = [
@@ -90,6 +90,7 @@ with log_area:
         st.markdown(f'{last["content"]}')
 
 st.markdown('---')
+
 
 
 
