@@ -56,7 +56,7 @@ with col2:
         st.session_state.memory = []
 
 
-    mustache = st.session_state.Mustache
+    Mustache = st.session_state.Mustache
 
 # ここで「ログ表示用の入れ物（プレースホルダー）」を先に作る
 log_area = st.container()
@@ -70,9 +70,6 @@ if user_input:
 
     st.session_state.memory.append({'role': 'user', 'content': user_input})
     st.session_state.memory.append({'role': 'assistant', 'content': reply})
-
-    # 入力ボックスをクリアしたければこんな感じ
-    st.session_state.user_input = ""
 
     # 再実行して画面を更新
     st.experimental_rerun()
@@ -96,3 +93,4 @@ with log_area:
         st.markdown(f'Mustache：{last["content"]}')
 
 st.markdown('---')
+
