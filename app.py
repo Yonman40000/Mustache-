@@ -54,39 +54,26 @@ with col2:
         st.session_state.Mustache = Character('Mustache', 'おしゃべり', client)
     if 'memory' not in st.session_state:
         st.session_state.memory = []
-
+    
+#入力欄
+user_input = st.text_input('入力してください(Enterで送信)')
+if user_input:
     Mustache = st.session_state.Mustache
 
-# ここで「ログ表示用の入れ物（プレースホルダー）」を先に作る
-log_area = st.container()
-
-user_input = st.text_input('入力してください(Enterで送信)', key='user_input')
-
-# 入力があったら先にメモリを更新（AIの返答も追加）
-if user_input:
     reply = Mustache.ai_reply(st.session_state.memory, user_input)
 
     st.session_state.memory.append({'role': 'user', 'content': user_input})
     st.session_state.memory.append({'role': 'assistant', 'content': reply})
 
-    st.session_state.user_input = ''
-    st.experimental_rerun()
-
 st.markdown('---')
 
 #チャットログ
-with log_area:
-    st.markdown('### Mustache')
-
-    assistant_messages = [
-        m for m in st.session_state.memory
-        if m['role'] == 'assistant'
-    ]
-    if not assistant_messages:
-        st.markdown('まだ会話がありません。')
-    else:
-        last = assistant_messages[-1:]  #last 1 lines
-        st.markdown(f'Mustache：{last["content"]}')
-
+st.markdown('### Mustache')
+if len(st.session_state.memory) == 0:
+    st.markdown('まだ会話がありません。')
+else:
+    latest_messages = st.session_state.memory[-1:]  #last 1 lines
+    for m in latest_messages:
+        st.markdown(f'Mustache：{m["content"]}')
 st.markdown('---')
 
