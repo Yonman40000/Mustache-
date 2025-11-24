@@ -42,8 +42,8 @@ class Character:
         return reply
 
 #streamlit UI 部分
-st.set_page_config(page_title={'Mustacheと話そう！'}, \n{'話そう'｝)
-st.title({'Mustacheと'}, \n{'話そう！'})
+st.set_page_config(page_title={'Mustacheと話そう！'\n'話そう'})
+st.title({'Mustacheと'\n'話そう！'})
 
 col1, col2 = st.columns([2,1])
 with col1:
@@ -90,6 +90,7 @@ with log_area:
         st.markdown(f'{last["content"]}')
 
 st.markdown('---')
+
 
 
 
