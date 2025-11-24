@@ -54,27 +54,45 @@ with col2:
         st.session_state.Mustache = Character('Mustache', 'おしゃべり', client)
     if 'memory' not in st.session_state:
         st.session_state.memory = []
-    
-#入力欄
-user_input = st.text_input('入力してください(Enterで送信)')
-if user_input:
-    Mustache = st.session_state.Mustache
 
-    reply = Mustache.ai_reply(st.session_state.memory, user_input)
+
+    mustache = st.session_state.Mustache
+
+# ここで「ログ表示用の入れ物（プレースホルダー）」を先に作る
+log_area = st.container()
+
+# 入力欄は画面上では下に見せたいので、ここに置く
+user_input = st.text_input('入力してください (Enterで送信)', key="user_input")
+
+# 入力があったら先にメモリを更新（AIの返答も追加）
+if user_input:
+    reply = mustache.ai_reply(st.session_state.memory, user_input)
 
     st.session_state.memory.append({'role': 'user', 'content': user_input})
     st.session_state.memory.append({'role': 'assistant', 'content': reply})
 
+    # 入力ボックスをクリアしたければこんな感じ
+    st.session_state.user_input = ""
+
+    # 再実行して画面を更新
+    st.experimental_rerun()
+
 st.markdown('---')
 
-#チャットログ
-st.markdown('### Mustache')
-if len(st.session_state.memory) == 0:
-    st.markdown('まだ会話がありません。')
-else:
-    latest_messages = st.session_state.memory[-1:]  #last 1 lines
-    for m in latest_messages:
-        st.markdown(f'Mustache：{m["content"]}')
+# ここで、さっき作った log_area の中に「最新のMustache発言だけ」を描画
+with log_area:
+    st.markdown('### Mustache')
+
+    # メモリから「assistant」のメッセージだけを取り出す
+    assistant_messages = [
+        m for m in st.session_state.memory
+        if m["role"] == "assistant"
+    ]
+
+    if not assistant_messages:
+        st.markdown('まだ会話がありません。')
+    else:
+        last = assistant_messages[-1]   # 最新のMustache発言だけ
+        st.markdown(f'Mustache：{last["content"]}')
+
 st.markdown('---')
-
-
