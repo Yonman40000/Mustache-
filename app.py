@@ -33,7 +33,7 @@ class Character:
         messages.append({'role': 'user', 'content': player_message})
 
         response = self.client.chat.completions.create(
-            model='gpt-5-nano',
+            model='gpt-4.1-mini',
             messages=messages,
             temperature=1.0, #感情レベル
         )
@@ -76,4 +76,5 @@ else:
     for m in latest_messages:
         st.markdown(f'Mustache：{m["content"]}')
 st.markdown('---')
+
 
