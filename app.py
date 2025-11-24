@@ -66,7 +66,7 @@ user_input = st.text_input('入力してください (Enterで送信)', key="use
 
 # 入力があったら先にメモリを更新（AIの返答も追加）
 if user_input:
-    reply = mustache.ai_reply(st.session_state.memory, user_input)
+    reply = Mustache.ai_reply(st.session_state.memory, user_input)
 
     st.session_state.memory.append({'role': 'user', 'content': user_input})
     st.session_state.memory.append({'role': 'assistant', 'content': reply})
@@ -93,4 +93,5 @@ with log_area:
         st.markdown(f'Mustache：{last["content"]}')
 
 st.markdown('---')
+
 
